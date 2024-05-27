@@ -31,6 +31,8 @@ app.post('/create', async (req, res) => {
   const tempFilePath = path.join(__dirname, 'temp', adjTitle + '.txt');
   const finalFilePath = path.join(__dirname, 'feedback', adjTitle + '.txt');
 
+  console.log('TEST!')
+
   await fs.writeFile(tempFilePath, content);
   exists(finalFilePath, async (exists) => {
     if (exists) {
@@ -40,7 +42,8 @@ app.post('/create', async (req, res) => {
       await fs.unlink(tempFilePath)
       res.redirect('/');
     }
+  
   });
 });
 
-app.listen(80);
+app.listen(process.env.PORT);
